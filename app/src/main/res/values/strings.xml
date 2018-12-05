@@ -19,5 +19,8 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
-    </string>'>
+    </string>
+    <string name="menu_item">Home</string>
+    <string name="menu_item_profile">profile</string>
+    <string name="menu_item_settings">Settings</string>'>
 </resources>
