@@ -2,10 +2,11 @@
     <string name="app_name">Tempo</string>
     <string name="email" username="email"></string>
     <string name="textView">login</string>
-    <string name="button">Create an account</string>
+    <string name="btn_signup">Sign Up</string>
+    <string name="btn_login">Login</string>
     <string name="textInputLayoutEmail">Email</string>
     <string name="textInputLayoutPassword">Password</string>
-    <string name="textViewLogin">Login</string>
+    <string name="textViewLogin">Login or Sign Up</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
