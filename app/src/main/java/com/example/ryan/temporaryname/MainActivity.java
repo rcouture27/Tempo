@@ -13,80 +13,114 @@ import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
-        DatabaseHelper myDB;
-        TextInputEditText inputEmail;
-        TextInputEditText inputPass;
-        Button btn_login;
-        Button btn_sign_up;
+    DatabaseHelper myDB;
+    TextInputEditText inputEmail;
+    TextInputEditText inputPass;
+    Button btn_login;
+    Button btn_sign_up;
+    String registered_pass;
+    String registered_email;
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-            try {
-                myDB = new DatabaseHelper(this);
-            } catch (Exception e) {
-                System.out.print("Exception occurred");
+        try {
+            myDB = new DatabaseHelper(this);
+        } catch (Exception e) {
+            System.out.print("Exception occurred");
+        }
+        inputEmail = findViewById(R.id.editTextEmail);
+        inputPass = findViewById(R.id.editTextPass);
+        btn_sign_up = findViewById(R.id.btn_sign_up);
+        btn_login = findViewById(R.id.btn_login);
+        sign_up();
+        login();
+
+    }
+
+    public void sign_up() {
+        btn_sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getAccount();
+
+                boolean inserted = myDB.insertData(inputEmail.getText().toString(), inputPass.getText().toString(), registered_email, registered_pass);
+
+                if (inserted) {
+                    Toast.makeText(MainActivity.this, "Account Created", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Registration failed: Email is already in use", Toast.LENGTH_LONG).show();
+                }
+
             }
-            inputEmail = findViewById(R.id.editTextEmail);
-            inputPass = findViewById(R.id.editTextPass);
-            btn_sign_up = findViewById(R.id.btn_sign_up);
-            btn_login = findViewById(R.id.btn_login);
-            sign_up();
-            login();
+        });
+    }
 
-        }
+    public void login() {
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String input_email = inputEmail.getText().toString();
+                String input_pass = inputPass.getText().toString();
 
-        public void sign_up() {
-            btn_sign_up.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    boolean inserted = myDB.insertData(inputEmail.getText().toString(), inputPass.getText().toString());
-
-                    if (inserted) {
-                        Toast.makeText(MainActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(MainActivity.this, "Data not Inserted", Toast.LENGTH_LONG).show();
-                    }
-
+                Cursor res_email = myDB.getEmail(input_email);
+                res_email.moveToNext();
+                if (res_email.getCount() == 0) {
+                    Toast.makeText(MainActivity.this, "Login failed: Email or Password is incorrect", Toast.LENGTH_LONG).show();
+                    return;
                 }
-            });
-        }
 
-        public void login() {
-            btn_login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String input_email = inputEmail.getText().toString();
-                    String input_pass = inputPass.getText().toString();
-
-                    Cursor res = myDB.getData();
-                    if (res.getCount() == 0) {
-                        // show message
-                        return;
-                    }
-
-                    StringBuffer buffer = new StringBuffer();
-                    //StringBuffer account_email = buffer;
-                    StringBuffer account_pass = buffer;
-
-                    res.moveToNext();
-                    //account_email = buffer.append(res.getString(1));
-
-                    //res.moveToNext();
-                    account_pass = buffer.append(res.getString(2));
-
-
-                    //Toast.makeText(MainActivity.this, "PreLogin", Toast.LENGTH_LONG).show();
-                    if (input_pass == account_pass) {
-                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
-                    }
-
-
+                Cursor res_pass = myDB.getPass(input_pass);
+                res_pass.moveToNext();
+                if (res_pass.getCount() == 0) {
+                    Toast.makeText(MainActivity.this, "Login failed: Email or Password is incorrect", Toast.LENGTH_LONG).show();
+                    return;
                 }
-            });
+
+                StringBuffer email_buffer = new StringBuffer();
+                StringBuffer pass_buffer = new StringBuffer();
+
+                email_buffer.append(res_email.getString(1));
+                String registered_email = email_buffer.toString();
+
+
+                pass_buffer.append(res_pass.getString(2));
+                String registered_pass = pass_buffer.toString();
+
+                if (input_email.equals(registered_email) && input_pass.equals(registered_pass)) {
+                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    public void getAccount() {
+        String input_email = inputEmail.getText().toString();
+        String input_pass = inputPass.getText().toString();
+
+        Cursor res_email = myDB.getEmail(input_email);
+        res_email.moveToNext();
+        if (res_email.getCount() == 0) {
+            return;
         }
+
+        Cursor res_pass = myDB.getPass(input_pass);
+        res_pass.moveToNext();
+        if (res_pass.getCount() == 0) {
+            return;
+        }
+
+        StringBuffer email_buffer = new StringBuffer();
+        StringBuffer pass_buffer = new StringBuffer();
+
+        email_buffer.append(res_email.getString(1));
+        registered_email = email_buffer.toString();
+
+        pass_buffer.append(res_pass.getString(2));
+        registered_pass = pass_buffer.toString();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
