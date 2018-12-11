@@ -44,15 +44,15 @@ public class MainActivity extends AppCompatActivity {
         btn_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getAccount();
+            getAccount();
 
-                boolean inserted = myDB.insertData(inputEmail.getText().toString(), inputPass.getText().toString(), registered_email, registered_pass);
+            boolean inserted = myDB.insertData(inputEmail.getText().toString(), inputPass.getText().toString(), registered_email, registered_pass);
 
-                if (inserted) {
-                    Toast.makeText(MainActivity.this, "Account Created", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(MainActivity.this, "Registration failed: Email is already in use", Toast.LENGTH_LONG).show();
-                }
+            if (inserted == true) {
+                Toast.makeText(MainActivity.this, "Account Created", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(MainActivity.this, "Registration failed: Email is already in use", Toast.LENGTH_LONG).show();
+            }
 
             }
         });
@@ -62,36 +62,36 @@ public class MainActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String input_email = inputEmail.getText().toString();
-                String input_pass = inputPass.getText().toString();
+            String input_email = inputEmail.getText().toString();
+            String input_pass = inputPass.getText().toString();
 
-                Cursor res_email = myDB.getEmail(input_email);
-                res_email.moveToNext();
-                if (res_email.getCount() == 0) {
-                    Toast.makeText(MainActivity.this, "Login failed: Email or Password is incorrect", Toast.LENGTH_LONG).show();
-                    return;
-                }
+            Cursor res_email = myDB.getEmail(input_email);
+            res_email.moveToNext();
+            if (res_email.getCount() == 0) {
+                Toast.makeText(MainActivity.this, "Login failed: Email or Password is incorrect", Toast.LENGTH_LONG).show();
+                return;
+            }
 
-                Cursor res_pass = myDB.getPass(input_pass);
-                res_pass.moveToNext();
-                if (res_pass.getCount() == 0) {
-                    Toast.makeText(MainActivity.this, "Login failed: Email or Password is incorrect", Toast.LENGTH_LONG).show();
-                    return;
-                }
+            Cursor res_pass = myDB.getPass(input_pass);
+            res_pass.moveToNext();
+            if (res_pass.getCount() == 0) {
+                Toast.makeText(MainActivity.this, "Login failed: Email or Password is incorrect", Toast.LENGTH_LONG).show();
+                return;
+            }
 
-                StringBuffer email_buffer = new StringBuffer();
-                StringBuffer pass_buffer = new StringBuffer();
+            StringBuffer email_buffer = new StringBuffer();
+            StringBuffer pass_buffer = new StringBuffer();
 
-                email_buffer.append(res_email.getString(1));
-                String registered_email = email_buffer.toString();
+            email_buffer.append(res_email.getString(1));
+            String registered_email = email_buffer.toString();
 
 
-                pass_buffer.append(res_pass.getString(2));
-                String registered_pass = pass_buffer.toString();
+            pass_buffer.append(res_pass.getString(2));
+            String registered_pass = pass_buffer.toString();
 
-                if (input_email.equals(registered_email) && input_pass.equals(registered_pass)) {
-                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
-                }
+            if (input_email.equals(registered_email) && input_pass.equals(registered_pass)) {
+                Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
+            }
             }
         });
     }

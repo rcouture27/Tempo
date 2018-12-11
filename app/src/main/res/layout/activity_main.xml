@@ -15,10 +15,9 @@
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.706"
+        app:layout_constraintVertical_bias="0.701"
         app:srcCompat="@drawable/asset1xxhdpi" />
 
     <ImageView
