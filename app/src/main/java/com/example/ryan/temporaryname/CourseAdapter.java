@@ -3,8 +3,10 @@ package com.example.ryan.temporaryname;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
@@ -27,14 +29,16 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.courseView
     private Context c;
     private List<Course> courseList;
     private View v;
+    private ArrayList<String> mVideos = new ArrayList<>();
+    VideoView videoview;
 
-    public CourseAdapter(Context c, List<Course> courseList) {
+
+    public CourseAdapter(Context c, List<Course> courseList, ArrayList<String> videos) {
         this.c = c;
         this.courseList = courseList;
+        this.mVideos = videos;
     }
 
-//    Intent myIntent = new Intent(this, Course1_OOP_java.class);
-//    startActivity(myIntent);
 
     @NonNull
     @Override
@@ -44,7 +48,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.courseView
         return new courseViewHolder(view);
     }
 
-    VideoView videoview;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -53,13 +57,43 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.courseView
             @Override
             public void onClick(View view) {
                 Toast.makeText(c, "Recycle Click" + position, Toast.LENGTH_SHORT).show();
+
+                if (position == 0) {
+                    Intent intent = new Intent(c, Course1_OOP_java.class);
+                    c.startActivity(intent);
+                } else if (position == 1) {
+                    Intent intent = new Intent(c, Course2_Android_tips.class);
+                    c.startActivity(intent);
+                } else if (position == 2) {
+                    Intent intent = new Intent(c, Course3_HTML.class);
+                    c.startActivity(intent);
+                } else if (position == 3) {
+                    Intent intent = new Intent(c, Course4_Javascript.class);
+                    c.startActivity(intent);
+                } else if (position == 4) {
+                    Intent intent = new Intent(c, Course5_JavaCSharp.class);
+                    c.startActivity(intent);
+                } else if (position == 5) {
+                    Intent intent = new Intent(c, Course6_languages.class);
+                    c.startActivity(intent);
+                } else if (position == 6) {
+                    Intent intent = new Intent(c, Course7_fundamentals.class);
+                    c.startActivity(intent);
+                } else if (position == 7) {
+                    Intent intent = new Intent(c, Course8_glusterfs.class);
+                    c.startActivity(intent);
+                } else if (position == 8) {
+                    Intent intent = new Intent(c, Course9_Async.class);
+                    c.startActivity(intent);
+                } else if (position == 9) {
+                    Intent intent = new Intent(c, Course10_Python.class);
+                    c.startActivity(intent);
+                }
             }
         });
 
 
-        if (position == 0) {
 
-        }
 
 
         Course course = courseList.get(position);

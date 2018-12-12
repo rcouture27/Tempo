@@ -26,6 +26,7 @@ public class activity_dashboard extends AppCompatActivity {
     ImageView courseImage;
     CardView cardView;
 
+    ArrayList<String> mVideos;
     List<Course> courseList;
 
     @Override
@@ -34,9 +35,7 @@ public class activity_dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         courseList = new ArrayList<>();
-
-
-
+        mVideos = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
@@ -46,8 +45,12 @@ public class activity_dashboard extends AppCompatActivity {
 
         displayCourses();
 
+        courseImage = findViewById(R.id.imageView_course1);
+
+        mVideos.add("This is a name");
+
         //creating recycler view adapter
-        CourseAdapter adapter = new CourseAdapter(this, courseList);
+        CourseAdapter adapter = new CourseAdapter(this, courseList, mVideos);
 
         //setting adapter to recycler view
         recyclerView.setAdapter(adapter);
@@ -76,9 +79,6 @@ public class activity_dashboard extends AppCompatActivity {
                 Intent myIntent = new Intent(getApplicationContext(), activity_dashboard.class);
                 startActivity(myIntent);
                 return true;
-            case R.id.menu_item_profile:
-                Toast.makeText(getApplicationContext(), "Hello 2", Toast.LENGTH_LONG).show();
-                return true;
             case R.id.menu_item_logout:
                 Intent logout = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(logout);
@@ -90,70 +90,26 @@ public class activity_dashboard extends AppCompatActivity {
 
     public void displayCourses() {
 
+        //adding some items to the list
+        courseList.add(new Course(1, "OOP with Java", R.drawable.card1xxxhdpi));
 
+        courseList.add(new Course(1,"Android studio tips", R.drawable.card2xxxhdpi));
 
-        //adding some items to our list
-        courseList.add(
-                new Course(
-                        1,
-                        "OOP with Java",
-                        R.drawable.card1xxxhdpi));
+        courseList.add(new Course(1,"HTML", R.drawable.card3xxxhdpi));
 
+        courseList.add(new Course(1, "Javascript functions", R.drawable.card4xxxhdpi));
 
+        courseList.add(new Course(1, "Java VS C#", R.drawable.card5xxxhdpi));
 
-        courseList.add(
-                new Course(
-                        1,
-                        "Android studio tips",
-                        R.drawable.card2xxxhdpi));
+        courseList.add(new Course(1, "Best languages", R.drawable.card6xxxhdpi));
 
-        courseList.add(
-                new Course(
-                        1,
-                        "HTML",
-                        R.drawable.card3xxxhdpi));
+        courseList.add(new Course(1, "fundamentals w/ Java", R.drawable.card7xxxhdpi));
 
-        courseList.add(
-                new Course(
-                        1,
-                        "Javascript functions",
-                        R.drawable.card4xxxhdpi));
+        courseList.add(new Course(1, "glusterfs volumes", R.drawable.card8xxxhdpi));
 
-        courseList.add(
-                new Course(
-                        1,
-                        "Java VS C#",
-                        R.drawable.card5xxxhdpi));
+        courseList.add(new Course(1, "Async programming C#", R.drawable.card9xxxhdpi));
 
-        courseList.add(
-                new Course(
-                        1,
-                        "Best languages",
-                        R.drawable.card6xxxhdpi));
-
-        courseList.add(
-                new Course(
-                        1,
-                        "fundamentals w/ Java",
-                        R.drawable.card7xxxhdpi));
-
-        courseList.add(
-                new Course(
-                        1,
-                        "glusterfs volumes",
-                        R.drawable.card8xxxhdpi));
-
-        courseList.add(
-                new Course(
-                        1,
-                        "Async programming C#",
-                        R.drawable.card9xxxhdpi));
-
-        courseList.add(
-                new Course(
-                        1,
-                        "Intro to Python",
-                        R.drawable.card10xxxhdpi));
+        courseList.add(new Course(1, "Intro to Python", R.drawable.card10xxxhdpi));
     }
 
 } // end class
