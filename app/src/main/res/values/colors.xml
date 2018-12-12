@@ -6,4 +6,6 @@
     <color name="btn_create_a_account">#02a4ec</color>
     <color name="background">#1288c7</color>
     <color name="dashboardBG">#0071BC</color>
+    <color name="card">#1a8fde</color>
+    <color name="black">#000000</color>
 </resources>

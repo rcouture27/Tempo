@@ -3,14 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_item_home"
-        android:title="@string/menu_item"
+        android:title="@string/menu_item_home"
         app:showAsAction="always"></item>
     <item
         android:id="@+id/menu_item_profile"
-        android:title="@string/menu_item_profile"
+        android:title="@string/menu_item_create_course"
         app:showAsAction="always"></item>
     <item
-        android:id="@+id/menu_item_settings"
-        android:title="@string/menu_item_settings"
+        android:id="@+id/menu_item_logout"
+        android:title="@string/menu_item_logout"
         app:showAsAction="always"></item>
 </menu>

@@ -21,14 +21,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity_dashboard"
+            android:label="@string/app_name" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+        <activity android:name=".Course1_OOP_java" />
+        <activity android:name=".Course2_Android_tips" />
+        <activity android:name=".Course3_HTML" />
+        <activity android:name=".Course4_Javascript" />
+        <activity android:name=".Course5_JavaCSharp" />
+        <activity android:name=".Course6_languages" />
+        <activity android:name=".Course7_fundamentals" />
+        <activity android:name=".Course8_glusterfs" />
+        <activity android:name=".Course9_Async" />
+        <activity android:name=".Course10_Python"></activity>
     </application>
 
 </manifest>
